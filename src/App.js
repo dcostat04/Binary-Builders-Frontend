@@ -5,17 +5,23 @@ import Login from './pages/user/login';
 import Signup from './pages/user/signup';
 import Admlogin from './pages/admin/login';
 import Addtherapy from './pages/admin/admAddTherapist';
+import Home from './pages/user/home';
 
 function App() {
+  localStorage.setItem('res', false);
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
           <Route path="/user/signup" element={<Signup />} />
           <Route path="/admin/login" element={<Admlogin />} />
           <Route path="/admin/therapist/" element={<Addtherapy />} />
           <Route path="/user/login" element={<Login />} />
+          {localStorage.getItem('res') ? (
+            <Route path="/" element={<Home />} />
+          ) : (
+            <Route path="/" element={<Login />} />
+          )}
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

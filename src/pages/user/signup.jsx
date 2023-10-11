@@ -33,7 +33,6 @@ const CFaLocation = chakra(FaLocationArrow);
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
-  const history = useNavigate();
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
@@ -57,7 +56,7 @@ export default function Signup() {
         'http://127.0.0.1:8000/api/SignUp/',
         formData
       );
-      history.push('/user/login');
+      window.location.replace('/user/login');
       console.log('Success', response.data);
     } catch (error) {
       console.log('errors', error);
@@ -255,7 +254,7 @@ export default function Signup() {
                 width="full"
                 rounded={'md'}
               >
-                Login
+                Sign Up
               </Button>
               <Center>
                 <Box>
