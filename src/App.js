@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import Login from './pages/user/login';
+import Referral from './pages/user/referral';
+import Confirmation from './pages/user/confirmation';
 import Signup from './pages/user/signup';
 import Admlogin from './pages/admin/login';
 import Addtherapy from './pages/admin/admAddTherapist';
@@ -17,6 +19,8 @@ function App() {
           <Route path="/admin/login" element={<Admlogin />} />
           <Route path="/admin/therapist/" element={<Addtherapy />} />
           <Route path="/user/login" element={<Login />} />
+          <Route path="/user/referral" element={<Referral />} />
+          <Route path="/user/confirmation" element={<Confirmation />} />
           {localStorage.getItem('res') ? (
             <Route path="/" element={<Home />} />
           ) : (
