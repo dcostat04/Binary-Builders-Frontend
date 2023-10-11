@@ -44,7 +44,7 @@ export default function Admlogin() {
         'http://127.0.0.1:8000/api/login/',
         formData
       );
-      localStorage.setItem('res', true);
+
       console.log('Login successful!', response.data);
       window.location.replace('/');
     } catch (error) {
