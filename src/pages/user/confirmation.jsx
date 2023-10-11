@@ -125,9 +125,8 @@ export default function Confirmation() {
               width="auto"
               padding="1em"
             >
-              <FormLabel width="30%">Date of birth</FormLabel>
-
-              <Center width={'30%'} alignContent={'flex-end'}>
+              <Center width={'55%'} alignContent={''}>
+                <FormLabel width="30%">Date of birth:</FormLabel>
                 <SingleDatepicker
                   name="date-input"
                   date={birthDate}
@@ -138,7 +137,7 @@ export default function Confirmation() {
                 />
               </Center>
 
-              <Center>
+              <Center width={'55%'}>
                 <Select
                   placeholder="Issue being addressed"
                   border="1px solid black"
