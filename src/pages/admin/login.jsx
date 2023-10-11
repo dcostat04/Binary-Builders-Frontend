@@ -73,7 +73,7 @@ export default function Admlogin() {
                     pointerEvents="none"
                     children={<CFaMailBulk color="gray.300" />}
                   />
-                  <Input type="email" placeholder="Email Address" />
+                  <Input type="email" placeholder="Email Address" required />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -86,6 +86,7 @@ export default function Admlogin() {
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Password"
+                    required
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
