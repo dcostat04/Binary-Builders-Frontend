@@ -1,3 +1,4 @@
+import './index.css';
 import { ColorModeScript } from '@chakra-ui/react';
 import * as ReactDOM from 'react-dom/client';
 import App from './App';
