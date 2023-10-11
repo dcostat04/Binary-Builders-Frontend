@@ -17,15 +17,40 @@ import {
   Center,
 } from '@chakra-ui/react';
 import { FaMailBulk, FaLock } from 'react-icons/fa';
+import { Axios } from 'axios';
 
 const CFaMailBulk = chakra(FaMailBulk);
 const CFaLock = chakra(FaLock);
 
-export default function Login() {
+export default function Admlogin() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const response = await Axios.get(
+        'http://127.0.0.1:8000/api/login/',
+        formData
+      );
+      localStorage.setItem('res', true);
+      console.log('Login successful!', response.data);
+      window.location.replace('/');
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+  };
   return (
     <Flex
       flexDirection="column"
@@ -44,7 +69,7 @@ export default function Login() {
         alignItems="center"
       >
         <Box minW={{ base: '90%', md: '468px' }}>
-          <form>
+          <form onSubmit={handleSubmit}>
             <Stack
               spacing={4}
               p="1rem"
@@ -64,7 +89,7 @@ export default function Login() {
               </Center>
               <Center>
                 <Heading size={'xl'} color="blue.400">
-                  User Login
+                  Admin Login
                 </Heading>
               </Center>
               <FormControl>
@@ -73,7 +98,14 @@ export default function Login() {
                     pointerEvents="none"
                     children={<CFaMailBulk color="gray.300" />}
                   />
-                  <Input type="email" placeholder="Email Address" required />
+                  <Input
+                    type="email"
+                    placeholder="Email Address"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                  />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -86,6 +118,9 @@ export default function Login() {
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
                     required
                   />
                   <InputRightElement width="4.5rem">
@@ -108,14 +143,6 @@ export default function Login() {
               >
                 Login
               </Button>
-              <Center>
-                <Box>
-                  New to us?{' '}
-                  <Link color="blue.500" href="/user/signup">
-                    Sign Up
-                  </Link>
-                </Box>
-              </Center>
             </Stack>
           </form>
         </Box>
