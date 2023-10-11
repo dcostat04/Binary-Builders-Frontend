@@ -10,14 +10,15 @@ import {
   chakra,
   Box,
   Link,
-  Avatar,
   FormControl,
   FormHelperText,
   InputRightElement,
+  Image,
+  Center,
 } from '@chakra-ui/react';
-import { FaUserAlt, FaLock } from 'react-icons/fa';
+import { FaMailBulk, FaLock } from 'react-icons/fa';
 
-const CFaUserAlt = chakra(FaUserAlt);
+const CFaMailBulk = chakra(FaMailBulk);
 const CFaLock = chakra(FaLock);
 
 export default function Login() {
@@ -30,7 +31,9 @@ export default function Login() {
       flexDirection="column"
       width="100wh"
       height="100vh"
-      backgroundColor="cyan"
+      backgroundImage={'/img/login_banner.jpg'}
+      backgroundSize={'cover'}
+      backgroundRepeat="no-repeat"
       justifyContent="center"
       alignItems="center"
     >
@@ -40,23 +43,37 @@ export default function Login() {
         justifyContent="center"
         alignItems="center"
       >
-        <Avatar bg="blue.500" />
-        <Heading color="blue.400">Welcome</Heading>
         <Box minW={{ base: '90%', md: '468px' }}>
           <form>
             <Stack
               spacing={4}
               p="1rem"
-              backgroundColor="whibluepha.900"
+              backgroundColor="white"
               boxShadow="md"
+              rounded={'md'}
             >
+              <Center>
+                <Image
+                  maxW="sm"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  overflow="hidden"
+                  objectFit={'cover'}
+                  src="/img/logo.png"
+                />
+              </Center>
+              <Center>
+                <Heading size={'xl'} color="blue.400">
+                  User Login
+                </Heading>
+              </Center>
               <FormControl>
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
-                    children={<CFaUserAlt color="gray.300" />}
+                    children={<CFaMailBulk color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" />
+                  <Input type="email" placeholder="Email Address" />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -77,7 +94,7 @@ export default function Login() {
                   </InputRightElement>
                 </InputGroup>
                 <FormHelperText textAlign="right">
-                  <Link>forgot password?</Link>
+                  <Link href="#">Forgot Password?</Link>
                 </FormHelperText>
               </FormControl>
               <Button
@@ -86,19 +103,22 @@ export default function Login() {
                 variant="solid"
                 colorScheme="blue"
                 width="full"
+                rounded={'md'}
               >
                 Login
               </Button>
+              <Center>
+                <Box>
+                  New to us?{' '}
+                  <Link color="blue.500" href="/user/signup">
+                    Sign Up
+                  </Link>
+                </Box>
+              </Center>
             </Stack>
           </form>
         </Box>
       </Stack>
-      <Box>
-        New to us?{' '}
-        <Link color="blue.500" href="#">
-          Sign Up
-        </Link>
-      </Box>
     </Flex>
   );
 }

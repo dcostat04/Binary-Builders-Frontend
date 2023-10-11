@@ -11,18 +11,17 @@ import {
   Box,
   Link,
   FormControl,
+  FormHelperText,
   InputRightElement,
   Image,
   Center,
 } from '@chakra-ui/react';
-import { FaUserAlt, FaLock, FaPhone, FaMailBulk } from 'react-icons/fa';
+import { FaMailBulk, FaLock } from 'react-icons/fa';
 
-const CFaUserAlt = chakra(FaUserAlt);
-const CFaLock = chakra(FaLock);
-const CFaPhone = chakra(FaPhone);
 const CFaMailBulk = chakra(FaMailBulk);
+const CFaLock = chakra(FaLock);
 
-export default function Signup() {
+export default function Admlogin() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
@@ -65,36 +64,9 @@ export default function Signup() {
               </Center>
               <Center>
                 <Heading size={'xl'} color="blue.400">
-                  User Sign Up
+                  Admin Login
                 </Heading>
               </Center>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<CFaUserAlt color="gray.300" />}
-                  />
-                  <Input type="text" placeholder="First and Middle Name" />
-                </InputGroup>
-              </FormControl>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<CFaUserAlt color="gray.300" />}
-                  />
-                  <Input type="text" placeholder="Last Name" />
-                </InputGroup>
-              </FormControl>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<CFaPhone color="gray.300" />}
-                  />
-                  <Input type="tel" placeholder="Phone No" />
-                </InputGroup>
-              </FormControl>
               <FormControl>
                 <InputGroup>
                   <InputLeftElement
@@ -113,7 +85,7 @@ export default function Signup() {
                   />
                   <Input
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter Password"
+                    placeholder="Password"
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -121,24 +93,9 @@ export default function Signup() {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-              </FormControl>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    color="gray.300"
-                    children={<CFaLock color="gray.300" />}
-                  />
-                  <Input
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Confirm Password"
-                  />
-                  <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                      {showPassword ? 'Hide' : 'Show'}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
+                <FormHelperText textAlign="right">
+                  <Link href="#">Forgot Password?</Link>
+                </FormHelperText>
               </FormControl>
               <Button
                 borderRadius={0}
@@ -150,14 +107,6 @@ export default function Signup() {
               >
                 Login
               </Button>
-              <Center>
-                <Box>
-                  Already Registered?{' '}
-                  <Link color="blue.500" href="/">
-                    Login
-                  </Link>
-                </Box>
-              </Center>
             </Stack>
           </form>
         </Box>
