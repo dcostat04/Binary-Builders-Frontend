@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
     Box,
     Input,
@@ -7,8 +8,10 @@ import {
     Select,
     Textarea,
     Button,
+    useDisclosure
 } from '@chakra-ui/react';
-import { submitReferral } from '../../services/booking';
+
+import CustomModal from '../../components/customModal';
 
 export default function Referral() {
     const [name, setName] = useState([]);
@@ -20,6 +23,9 @@ export default function Referral() {
     const [description, setDescription] = useState([]);
     const [relation, setRelation] = useState([]);
     const [issue, setIssue] = useState([]);
+    const [response, setResponse] = useState({});
+    const [success, setSuccess] = useState(true);
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -52,9 +58,29 @@ export default function Referral() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("abc");
-        const response = await submitReferral();
-        console.log(response);
+        try {
+            const tempResponse = await axios.post('http://127.0.0.1:8000/api/booking/',
+                JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    address,
+                    city,
+                    issue,
+                    description,
+                    citizenship_id,
+                    relation
+                })
+            );
+            console.log(response);
+            setResponse(tempResponse);
+        } catch (error) {
+            //show error page
+            setSuccess(false);
+        }
     }
+
+    useEffect(() => { }, [response])
 
     return (
         <Box
@@ -64,6 +90,23 @@ export default function Referral() {
             justifyContent={"center"}
             padding="2em"
         >
+            {
+                success && Object.keys(response).length > 0 &&
+                <CustomModal
+                    type="success"
+                    message="Your referral has been submitted with reference ID: 123"
+                    isOpen={isOpen}
+                    onClose={onClose}
+                />}
+            {
+                !success && <CustomModal
+                    type="error"
+                    message="There was some error submitting your form"
+                    isOpen={isOpen}
+                    onClose={onClose}
+                />
+            }
+
             <form
                 onSubmit={handleSubmit}
             >
@@ -82,6 +125,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handleNameChange}
+                        value={name}
                         required={true}
                     />
                     <Input
@@ -92,6 +136,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handleEmailChange}
+                        value={email}
                     />
                     <FormHelperText>We'll never share your email.</FormHelperText>
 
@@ -103,6 +148,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handlePhoneChange}
+                        value={phone}
                     />
 
                     <Input
@@ -112,6 +158,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handleAddressChange}
+                        value={address}
                     />
 
                     <Input
@@ -121,6 +168,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handleCityChange}
+                        value={city}
                     />
 
                     <Input
@@ -130,6 +178,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handleCitizenshipIDChange}
+                        value={citizenship_id}
                     />
 
                     <Select
@@ -138,6 +187,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handleRelationChange}
+                        value={relation}
                         required
                     >
                         <option value='Self'>Self</option>
@@ -151,6 +201,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handleIssueChange}
+                        value={issue}
                         required
                     >
                         <option value='Self'>Support after suicide</option>
@@ -166,6 +217,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         onChange={handleDescriptionChange}
+                        value={description}
                         required
                     />
 
@@ -174,6 +226,7 @@ export default function Referral() {
                         width={[250, 400, 700]}
                         margin="0.5em auto"
                         type="submit"
+                        onClick={onOpen}
                     >
                         Submit
                     </Button>
