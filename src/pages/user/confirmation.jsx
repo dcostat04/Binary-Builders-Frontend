@@ -109,100 +109,113 @@ export default function Confirmation() {
             onClose={onClose}
           />
         )}
-
-        <form onSubmit={handleSubmit}>
-          <Stack
-            spacing={4}
-            p="1rem"
-            backgroundColor="white"
-            boxShadow="md"
-            rounded={'md'}
-          >
-            <FormControl
-              display="flex"
-              flexDirection={'column'}
-              // alignItems={"center"}
-              width="auto"
-              padding="1em"
+        <Box minW={{ base: '90%', md: '468px' }}>
+          <form onSubmit={handleSubmit}>
+            <Stack
+              spacing={4}
+              p="1rem"
+              backgroundColor="white"
+              boxShadow="md"
+              rounded={'md'}
             >
-              <Center width={'55%'} alignContent={''}>
-                <FormLabel width="30%">Date of birth:</FormLabel>
-                <SingleDatepicker
-                  name="date-input"
-                  date={birthDate}
-                  onDateChange={handleBirthDateChange}
-                  border="1px solid black"
-                  width={[150, 100, 100]}
-                  margin="1em auto"
-                />
-              </Center>
-
-              <Center width={'55%'}>
-                <Select
-                  placeholder="Issue being addressed"
-                  border="1px solid black"
-                  width={[250, 400, 700]}
-                  margin="1em auto"
-                  onChange={handleIssueChange}
-                  required
-                >
-                  <option value="Self">Support after suicide</option>
-                  <option value="Family">Affected by bereavement</option>
-                  <option value="Friend">
-                    Need occupational health counselling
-                  </option>
-                  <option value="Friend">
-                    Emotional support for domestic abuse
-                  </option>
-                  <option value="Friend">Child counselling</option>
-                </Select>
-              </Center>
-
-              <Textarea
-                placeholder="Issue Description"
-                border="1px solid black"
-                width={[250, 400, 700]}
-                margin="1em auto"
-                onChange={handleDescriptionChange}
-                value={description}
-                required
-              />
-
-              <Flex width={'70%'} alignItems={'center'} margin="1em auto">
-                <FormLabel width={'50%'}>Schedule Appointment</FormLabel>
-                <SingleDatepicker
-                  name="date-input"
-                  date={date}
-                  onDateChange={handleDateChange}
-                  border="1px solid black"
-                  width={[150, 100, 100]}
-                />
-              </Flex>
-
-              <Flex>
-                <FormLabel>Hours:</FormLabel>
-                <TimePicker
-                  type="hour"
-                  value={hour}
-                  setValue={handleHourChange}
-                />
-                <FormLabel>Mins:</FormLabel>
-                <TimePicker type="min" value={min} setValue={handleMinChange} />
-                <FormLabel>Seconds:</FormLabel>
-                <TimePicker type="sec" value={sec} setValue={handleSecChange} />
-              </Flex>
-
-              <Button
-                border="1px solid black"
-                width={[250, 400, 700]}
-                margin="1em auto"
-                type="submit"
+              <FormControl
+                display="flex"
+                flexDirection={'column'}
+                // alignItems={"center"}
+                width="auto"
+                padding="1em"
               >
-                Submit
-              </Button>
-            </FormControl>
-          </Stack>
-        </form>
+                <Center width={'95%'} alignContent={''}>
+                  <FormLabel width="20%">Date of birth:</FormLabel>
+                  <SingleDatepicker
+                    name="date-input"
+                    date={birthDate}
+                    onDateChange={handleBirthDateChange}
+                    border="1px solid black"
+                    width={[250, 300, 400]}
+                    margin="1em auto"
+                  />
+                </Center>
+
+                <Center width={'95%'}>
+                  <Select
+                    placeholder="Issue being addressed"
+                    border="1px solid black"
+                    width={[250, 400, 700]}
+                    margin="1em auto"
+                    onChange={handleIssueChange}
+                    required
+                  >
+                    <option value="Self">Support after suicide</option>
+                    <option value="Family">Affected by bereavement</option>
+                    <option value="Friend">
+                      Need occupational health counselling
+                    </option>
+                    <option value="Friend">
+                      Emotional support for domestic abuse
+                    </option>
+                    <option value="Friend">Child counselling</option>
+                  </Select>
+                </Center>
+
+                <Center width={'95%'}>
+                  <Textarea
+                    placeholder="Issue Description"
+                    border="1px solid black"
+                    width={[250, 400, 700]}
+                    margin="1em auto"
+                    onChange={handleDescriptionChange}
+                    value={description}
+                    required
+                  />
+                </Center>
+
+                <Center width={'95%'}>
+                  <FormLabel width={'40%'}>Schedule Appointment:</FormLabel>
+                  <SingleDatepicker
+                    name="date-input"
+                    date={date}
+                    onDateChange={handleDateChange}
+                    border="1px solid black"
+                    width={[150, 100, 100]}
+                  />
+                </Center>
+
+                <Center width={'95%'}>
+                  <Flex>
+                    <FormLabel>Hours:</FormLabel>
+                    <TimePicker
+                      type="hour"
+                      value={hour}
+                      setValue={handleHourChange}
+                    />
+                    <FormLabel>Mins:</FormLabel>
+                    <TimePicker
+                      type="min"
+                      value={min}
+                      setValue={handleMinChange}
+                    />
+                    <FormLabel>Seconds:</FormLabel>
+                    <TimePicker
+                      type="sec"
+                      value={sec}
+                      setValue={handleSecChange}
+                    />
+                  </Flex>
+                </Center>
+
+                <Button
+                  border="1px solid black"
+                  width={[150, 300, 600]}
+                  margin="1em auto"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </FormControl>
+            </Stack>
+          </form>
+        </Box>
       </Box>
     </Flex>
   );
