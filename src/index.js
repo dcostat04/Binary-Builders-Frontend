@@ -5,6 +5,7 @@ import App from './App';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
+localStorage.setItem('response', true);
 
 root.render(
   <>
