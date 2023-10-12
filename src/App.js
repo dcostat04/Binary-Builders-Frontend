@@ -14,18 +14,16 @@ function App() {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    if (!localStorage.getItem(user)) localStorage.setItem('user', user);
-  }, []);
+
+    if (!localStorage.getItem(user))
+      localStorage.setItem("user", user)
+  }, [user])
 
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          {user && <Route exact path="/" element={<Home />} />}
 
-          {!user && (
-            <Route exact path="/" element={<Login setUser={setUser} />} />
-          )}
 
           {/* <Route path="/admin/login" element={<Admlogin />} /> */}
 
@@ -34,10 +32,15 @@ function App() {
             <Route path="login" element={<Admlogin />} />
           </Route>
 
+          {
+            user ? <Route exact path="/user" element={<Home />} /> :
+              <Route exact path="/user" element={<Login setUser={setUser} />} />
+          }
+
           <Route path="/user">
             <Route path="referral" element={<Referral />} />
-            <Route path="confirmation" element={<Confirmation />} />
             <Route path="login" element={<Login />} />
+            <Route path="confirmation" element={<Confirmation />} />
             <Route path="signup" element={<Signup />} />
             <Route path="view-case" element={<CaseFile />} />
           </Route>

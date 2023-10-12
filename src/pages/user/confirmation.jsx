@@ -10,6 +10,7 @@ import {
   useDisclosure,
   Stack,
   Center,
+  Progress,
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import TimePicker from '../../components/timePicker';
@@ -25,16 +26,11 @@ export default function Confirmation() {
   const [min, setMin] = useState(15);
   const [sec, setSec] = useState(15);
   const [response, setResponse] = useState({});
-  const [success] = useState(true);
+  const [submit, setSubmit] = useState(false);
+  const [isError, setIsError] = useState(false);
   const { isOpen, onClose } = useDisclosure();
   const parse = val => val.replace(/^\$/, '');
 
-  const handleDateChange = event => {
-    setDate(event.target.value);
-  };
-  const handleBirthDateChange = event => {
-    setBirthDate(event.target.value);
-  };
   const handleHourChange = valueString => {
     setHour(parse(valueString));
   };
@@ -53,23 +49,29 @@ export default function Confirmation() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log(issue);
-    console.log('abc');
-    console.log(hour);
+    setSubmit(true);
     try {
       const tempResponse = await axios.post(
         'http://127.0.0.1:8000/api/Confirmation/',
         JSON.stringify({
-          dob: birthDate,
+          DOB: birthDate.getDate() + "/" + birthDate.getMonth() + "/" + birthDate.getFullYear(),
           issue,
           description,
-          date,
+          date: date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear(),
           time: hour + ':' + min + ':' + sec,
         })
       );
-      console.log(response);
-      setResponse(tempResponse);
-    } catch (error) {}
+      console.log(tempResponse?.data);
+      if (tempResponse?.data?.status === "ERROR")
+        setIsError(true);
+      else
+        setResponse(tempResponse?.data);
+      setTimeout(() => {
+        window.location.reload("/")
+      }, 10000)
+    } catch (error) {
+      setIsError(true)
+    }
   };
 
   return (
@@ -83,6 +85,14 @@ export default function Confirmation() {
       justifyContent="center"
       alignItems="center"
     >
+      {
+        submit && Object.keys(response).length === 0 && <Progress size='lg' width="100%"
+          isIndeterminate
+          position={"absolute"}
+          top="0%"
+          left="0%"
+          height="10px" />
+      }
       <Box
         display={'flex'}
         alignItems={'center'}
@@ -90,15 +100,15 @@ export default function Confirmation() {
         padding="2em"
         height="100vh"
       >
-        {success && Object.keys(response).length > 0 && (
+        {submit && response?.status === "OKAY" && (
           <CustomModal
             type="success"
-            message="You will be contacted soon"
+            message="Your confirmation has been submitted"
             isOpen={isOpen}
             onClose={onClose}
           />
         )}
-        {!success && (
+        {submit && isError && (
           <CustomModal
             type="error"
             message="There was some error submitting your form"
@@ -127,10 +137,11 @@ export default function Confirmation() {
                   <SingleDatepicker
                     name="date-input"
                     date={birthDate}
-                    onDateChange={handleBirthDateChange}
+                    onDateChange={setBirthDate}
                     border="1px solid black"
                     width={[250, 300, 400]}
                     margin="1em auto"
+                    form
                   />
                 </Center>
 
@@ -141,7 +152,9 @@ export default function Confirmation() {
                     width={[250, 400, 700]}
                     margin="1em auto"
                     onChange={handleIssueChange}
+                    value={issue}
                     required
+                    displayFormat="DD/MM/YYYY"
                   >
                     <option value="Self">Support after suicide</option>
                     <option value="Family">Affected by bereavement</option>
@@ -172,14 +185,14 @@ export default function Confirmation() {
                   <SingleDatepicker
                     name="date-input"
                     date={date}
-                    onDateChange={handleDateChange}
+                    onDateChange={setDate}
                     border="1px solid black"
                     width={[150, 100, 100]}
                   />
                 </Center>
 
                 <Center width={'95%'}>
-                  <Flex>
+                  <Flex margin={"1em auto"} alignItems={"center"}>
                     <FormLabel>Hours:</FormLabel>
                     <TimePicker
                       type="hour"
