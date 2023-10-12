@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Flex,
   Heading,
@@ -14,6 +14,7 @@ import {
   InputRightElement,
   Image,
   Center,
+  Progress,
 } from '@chakra-ui/react';
 import { FaMailBulk, FaLock } from 'react-icons/fa';
 import axios from 'axios';
@@ -23,6 +24,8 @@ const CFaLock = chakra(FaLock);
 
 export default function Login({ setUser }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [response, setResponse] = useState({});
+  const [submit, setSubmit] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -38,19 +41,26 @@ export default function Login({ setUser }) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setSubmit(true);
     try {
       console.log(formData);
-      const response = await axios.post(
+      const tempResponse = await axios.post(
         'http://127.0.0.1:8000/api/login/',
         JSON.stringify(formData)
       );
-      console.log('Login successful!', response.data);
+      console.log('Login successful!', tempResponse?.data);
       setUser(true);
+      setResponse(tempResponse);
       // window.location.replace('/');
     } catch (error) {
       console.error('Error logging in:', error);
     }
   };
+
+  useEffect(() => {
+    if (Object.keys(response).length > 0)
+      setSubmit(false);
+  }, [response])
 
   return (
     <Flex
@@ -63,6 +73,14 @@ export default function Login({ setUser }) {
       justifyContent="center"
       alignItems="center"
     >
+      {
+        submit && Object.keys(response).length === 0 && <Progress size='lg' width="100%"
+          isIndeterminate
+          position={"absolute"}
+          top="0%"
+          left="0%"
+          height="10px" />
+      }
       <Stack
         flexDir="column"
         mb="2"

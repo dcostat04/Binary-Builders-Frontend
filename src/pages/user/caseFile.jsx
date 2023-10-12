@@ -1,25 +1,46 @@
 import {
   Box,
   Flex,
-  Text,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
   Heading,
   Center,
   VStack,
-  StackDivider,
   Button,
+  Progress,
 } from '@chakra-ui/react';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 export default function CaseFile() {
+  const [submit, setSubmit] = useState(false);
+  const [response, setResponse] = useState({});
+
+
+  const handleButtonClick = async () => {
+    setSubmit(true);
+    try {
+      const tempResponse = await axios.post("http://127.0.0.1:8000/api/MeetingLink/",
+        { "email": "9415kks@gmail.com" }
+      );
+      console.log(tempResponse);
+      setResponse(tempResponse);
+    } catch (error) {
+      console.log(error);
+      setSubmit(false);
+    }
+  }
+
+  useEffect(() => {
+    if (Object.keys(response).length > 0)
+      setSubmit(false);
+  }, [response])
+
   return (
     <>
       <Flex
@@ -31,6 +52,14 @@ export default function CaseFile() {
         backgroundRepeat="no-repeat"
         justifyContent="center"
       >
+        {
+          submit && Object.keys(response).length === 0 && <Progress size='lg' width="100%"
+            isIndeterminate
+            position={"absolute"}
+            top="0%"
+            left="0%"
+            height="10px" />
+        }
         <VStack
           //   divider={<StackDivider borderColor="gray.200" />}
           spacing={4}
@@ -103,6 +132,7 @@ export default function CaseFile() {
               variant="solid"
               colorScheme="blue"
               rounded={'md'}
+              onClick={handleButtonClick}
             >
               Schedule a Call
             </Button>
