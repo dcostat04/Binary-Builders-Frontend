@@ -133,8 +133,10 @@ export default function Addtherapy() {
               <FormControl>
                 <Select placeholder="Select Therapy Expertise">
                   <option value="option1">Support after suicide</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  <option value="option2">Need occupational health counselling</option>
+                  <option value="option3">Affected by bereavement</option>
+                  <option value="option4">Emotional support for domestic abuse</option>
+                  <option value="option5">Child counselling</option>
                 </Select>
               </FormControl>
               <FormControl>
@@ -185,14 +187,7 @@ export default function Addtherapy() {
               >
                 Add Therapist
               </Button>
-              <Center>
-                <Box>
-                  Already Registered?{' '}
-                  <Link color="blue.500" href="/">
-                    Login
-                  </Link>
-                </Box>
-              </Center>
+
             </Stack>
           </form>
         </Box>
