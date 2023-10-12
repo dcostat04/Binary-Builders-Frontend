@@ -95,7 +95,7 @@ export default function Login({ setUser }) {
               </Center>
               <Center>
                 <Heading size={'xl'} color="blue.400">
-                  Admin Login
+                  User Login
                 </Heading>
               </Center>
               <FormControl>
@@ -135,9 +135,9 @@ export default function Login({ setUser }) {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <FormHelperText textAlign="right">
+                {/* <FormHelperText textAlign="right">
                   <Link href="#">Forgot Password?</Link>
-                </FormHelperText>
+                </FormHelperText> */}
               </FormControl>
               <Button
                 borderRadius={0}
@@ -149,6 +149,14 @@ export default function Login({ setUser }) {
               >
                 Login
               </Button>
+              <Center>
+                <Box>
+                  New Registration?{' '}
+                  <Link color="blue.500" href="/user/signup">
+                    Sign up
+                  </Link>
+                </Box>
+              </Center>
             </Stack>
           </form>
         </Box>
