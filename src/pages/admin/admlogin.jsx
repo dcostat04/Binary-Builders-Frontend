@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Flex,
   Heading,
@@ -11,19 +11,19 @@ import {
   Box,
   Link,
   FormControl,
+  FormHelperText,
   InputRightElement,
   Image,
   Center,
 } from '@chakra-ui/react';
 import { FaMailBulk, FaLock } from 'react-icons/fa';
-import axios from 'axios';
+import { Axios } from 'axios';
 
 const CFaMailBulk = chakra(FaMailBulk);
 const CFaLock = chakra(FaLock);
 
-export default function Login({ setUser }) {
+export default function Admlogin() {
   const [showPassword, setShowPassword] = useState(false);
-  const [response] = useState({ user: false });
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -40,19 +40,17 @@ export default function Login({ setUser }) {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      console.log(formData);
-      const response = await axios.post(
+      const response = await Axios.get(
         'http://127.0.0.1:8000/api/login/',
-        JSON.stringify(formData)
+        formData
       );
-      console.log('Login successful!', response);
-      setUser(true);
-      // window.location.replace('/');
+
+      console.log('Login successful!', response.data);
+      window.location.replace('/');
     } catch (error) {
       console.error('Error logging in:', error);
     }
   };
-
   return (
     <Flex
       flexDirection="column"
@@ -91,7 +89,7 @@ export default function Login({ setUser }) {
               </Center>
               <Center>
                 <Heading size={'xl'} color="blue.400">
-                  User Login
+                  Admin Login
                 </Heading>
               </Center>
               <FormControl>
@@ -131,9 +129,9 @@ export default function Login({ setUser }) {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                {/* <FormHelperText textAlign="right">
+                <FormHelperText textAlign="right">
                   <Link href="#">Forgot Password?</Link>
-                </FormHelperText> */}
+                </FormHelperText>
               </FormControl>
               <Button
                 borderRadius={0}
@@ -145,14 +143,6 @@ export default function Login({ setUser }) {
               >
                 Login
               </Button>
-              <Center>
-                <Box>
-                  New Registration?{' '}
-                  <Link color="blue.500" href="/user/signup">
-                    Sign up
-                  </Link>
-                </Box>
-              </Center>
             </Stack>
           </form>
         </Box>
