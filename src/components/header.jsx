@@ -1,11 +1,15 @@
 
 import { Image, Flex, Button, HStack, chakra, Link } from '@chakra-ui/react';
-import React from "react";
 
 
 
 
 export default function Header() {
+
+    const handleRefer = () => {
+        console.log("sdasd");
+    }
+
     return (
         <chakra.header id="header">
             <Flex
@@ -25,11 +29,14 @@ export default function Header() {
                     <Link>
                         <Button variant="nav" color={'teal.200'}> Contact </Button>
                     </Link>
-                    <Link>
-                        <Button variant="nav" color={'blue.200'}> Refer </Button>
+                    <Link to="/user/referral">
+                        <Button variant="nav" color={'blue.200'} onClick={handleRefer}> Refer </Button>
                     </Link>
                     <Link>
                         <Button variant="nav" color={'blue.500'}> More </Button>
+                    </Link>
+                    <Link to="/login">
+                        <Button variant="nav" color={'green.500'}> Logout </Button>
                     </Link>
 
                 </HStack>
