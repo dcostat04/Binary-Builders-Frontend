@@ -1,4 +1,22 @@
-import { Box, Flex, Text } from '@chakra-ui/layout';
+import {
+  Box,
+  Flex,
+  Text,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Heading,
+  Center,
+  VStack,
+  StackDivider,
+  Button,
+} from '@chakra-ui/react';
 import React from 'react';
 
 export default function CaseFile() {
@@ -12,60 +30,84 @@ export default function CaseFile() {
         backgroundSize={'cover'}
         backgroundRepeat="no-repeat"
         justifyContent="center"
-        alignItems="center"
       >
-        <Box
-          display={'flex'}
-          flexDirection={'column'}
-          //   border="1px solid red"
-          //   alignItems={'center'}
-          justifyContent={'center'}
-          padding="2em"
-          backgroundColor={'white'}
+        <VStack
+          //   divider={<StackDivider borderColor="gray.200" />}
+          spacing={4}
+          height={'85%'}
         >
-          <Flex margin={'0.5em 0'}>
-            <Text fontStyle={'bold'} fontSize={'1.6em'}>
-              Acronym:{' '}
-            </Text>
-            <Text fontSize="1.6em">{'a'}</Text>
-          </Flex>
-          <Flex margin={'0.5em 0'}>
-            <Text fontStyle={'bold'} fontSize={'1.6em'}>
-              Full Name:{' '}
-            </Text>
-            <Text fontSize="1.6em">{'a'}</Text>
-          </Flex>
-          <Flex margin={'0.5em 0'}>
-            <Text fontStyle={'bold'} fontSize={'1.6em'}>
-              Email:{' '}
-            </Text>
-            <Text fontSize="1.6em">{'a'}</Text>
-          </Flex>
-          <Flex margin={'0.5em 0'}>
-            <Text fontStyle={'bold'} fontSize={'1.6em'}>
-              Phone:{' '}
-            </Text>
-            <Text fontSize="1.6em">{'a'}</Text>
-          </Flex>
-          <Flex margin={'0.5em 0'}>
-            <Text fontStyle={'bold'} fontSize={'1.6em'}>
-              Date of birth:{' '}
-            </Text>
-            <Text fontSize="1.6em">{'a'}</Text>
-          </Flex>
-          <Flex margin={'0.5em 0'}>
-            <Text fontStyle={'bold'} fontSize={'1.6em'}>
-              Issue:{' '}
-            </Text>
-            <Text fontSize="1.6em">{'a'}</Text>
-          </Flex>
-          <Flex margin={'0.5em 0'}>
-            <Text fontStyle={'bold'} fontSize={'1.6em'}>
-              Description:{' '}
-            </Text>
-            <Text fontSize="1.6em">{'a'}</Text>
-          </Flex>
-        </Box>
+          <Heading color={'white'}>Case File</Heading>
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+            backgroundColor={'white'}
+            width={'75%'}
+            rounded={'md'}
+          >
+            <TableContainer>
+              <Center>
+                <Heading>Client Entries</Heading>
+              </Center>
+              <Table variant="simple">
+                <Thead>
+                  <Tr>
+                    <Th>Detail Issues</Th>
+                    <Th>Acronym</Th>
+                    <Th>Date</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Kartik Srivastava</Td>
+                    <Td>K_GTIS</Td>
+                    <Td>12-10-2023</Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </Box>
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+            padding="2em"
+            backgroundColor={'white'}
+            width={'75%'}
+            rounded={'md'}
+          >
+            <TableContainer>
+              <Center>
+                <Heading>Therapist Entries</Heading>
+              </Center>
+              <Table variant="simple">
+                <Thead>
+                  <Tr>
+                    <Th>Detail Issues</Th>
+                    <Th>Therapist Name</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>Kartik Srivastava</Td>
+                    <Td>Kartik Srivastava</Td>
+                  </Tr>
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </Box>
+          <Center>
+            <Button
+              borderRadius={0}
+              type="submit"
+              variant="solid"
+              colorScheme="blue"
+              rounded={'md'}
+            >
+              Schedule a Call
+            </Button>
+          </Center>
+        </VStack>
       </Flex>
     </>
   );
