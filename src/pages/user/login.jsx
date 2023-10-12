@@ -11,7 +11,6 @@ import {
   Box,
   Link,
   FormControl,
-  FormHelperText,
   InputRightElement,
   Image,
   Center,
@@ -24,6 +23,7 @@ const CFaLock = chakra(FaLock);
 
 export default function Login({ setUser }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [response, setResponse] = useState({ user: false });
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -131,9 +131,9 @@ export default function Login({ setUser }) {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
-                <FormHelperText textAlign="right">
+                {/* <FormHelperText textAlign="right">
                   <Link href="#">Forgot Password?</Link>
-                </FormHelperText>
+                </FormHelperText> */}
               </FormControl>
               <Button
                 borderRadius={0}
@@ -145,6 +145,14 @@ export default function Login({ setUser }) {
               >
                 Login
               </Button>
+              <Center>
+                <Box>
+                  New Registration?{' '}
+                  <Link color="blue.500" href="/user/signup">
+                    Sign up
+                  </Link>
+                </Box>
+              </Center>
             </Stack>
           </form>
         </Box>
