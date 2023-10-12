@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import Login from './pages/user/login';
@@ -14,6 +14,7 @@ function App() {
   const [user, setUser] = useState(false);
 
   useEffect(() => {
+
     if (!localStorage.getItem(user))
       localStorage.setItem("user", user)
   }, [])
