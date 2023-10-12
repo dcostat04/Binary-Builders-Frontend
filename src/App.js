@@ -17,7 +17,7 @@ function App() {
 
     if (!localStorage.getItem(user))
       localStorage.setItem("user", user)
-  }, [])
+  }, [user])
 
   return (
     <ChakraProvider theme={theme}>

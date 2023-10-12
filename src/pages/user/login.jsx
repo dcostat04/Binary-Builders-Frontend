@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Flex,
   Heading,
@@ -23,7 +23,6 @@ const CFaLock = chakra(FaLock);
 
 export default function Login({ setUser }) {
   const [showPassword, setShowPassword] = useState(false);
-  const [response, setResponse] = useState({ user: false });
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
