@@ -9,7 +9,6 @@ import {
   InputLeftElement,
   chakra,
   Box,
-  Link,
   FormControl,
   InputRightElement,
   Image,
@@ -32,11 +31,6 @@ const CFaLocation = chakra(FaLocationArrow);
 
 export default function Addtherapy() {
   const [showPassword, setShowPassword] = useState(false);
-  const [fname, setFname] = useState([]);
-  const [lname, setLname] = useState([]);
-  const [email, setEmail] = useState([]);
-  const [phone, setPhone] = useState([]);
-  const [location, setLocation] = useState([]);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -133,9 +127,13 @@ export default function Addtherapy() {
               <FormControl>
                 <Select placeholder="Select Therapy Expertise">
                   <option value="option1">Support after suicide</option>
-                  <option value="option2">Need occupational health counselling</option>
+                  <option value="option2">
+                    Need occupational health counselling
+                  </option>
                   <option value="option3">Affected by bereavement</option>
-                  <option value="option4">Emotional support for domestic abuse</option>
+                  <option value="option4">
+                    Emotional support for domestic abuse
+                  </option>
                   <option value="option5">Child counselling</option>
                 </Select>
               </FormControl>
@@ -187,7 +185,6 @@ export default function Addtherapy() {
               >
                 Add Therapist
               </Button>
-
             </Stack>
           </form>
         </Box>

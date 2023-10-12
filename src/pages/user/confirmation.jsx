@@ -25,8 +25,8 @@ export default function Confirmation() {
   const [min, setMin] = useState(15);
   const [sec, setSec] = useState(15);
   const [response, setResponse] = useState({});
-  const [success, setSuccess] = useState(true);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [success] = useState(true);
+  const { isOpen, onClose } = useDisclosure();
   const parse = val => val.replace(/^\$/, '');
 
   const handleDateChange = event => {
@@ -69,7 +69,7 @@ export default function Confirmation() {
       );
       console.log(response);
       setResponse(tempResponse);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (

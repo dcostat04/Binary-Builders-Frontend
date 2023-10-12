@@ -11,7 +11,6 @@ import {
   Box,
   Link,
   FormControl,
-  FormHelperText,
   InputRightElement,
   Image,
   Center,
@@ -24,7 +23,7 @@ const CFaLock = chakra(FaLock);
 
 export default function Login({ setUser }) {
   const [showPassword, setShowPassword] = useState(false);
-  const [response, setResponse] = useState({ user: false });
+  const [response] = useState({ user: false });
 
   const handleShowClick = () => setShowPassword(!showPassword);
 

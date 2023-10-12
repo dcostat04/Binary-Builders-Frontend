@@ -26,7 +26,7 @@ function App() {
           {/* <Route path="/admin/login" element={<Admlogin />} /> */}
 
           <Route path="/admin">
-            <Route path="therapist" element={<Referral />} />
+            <Route path="therapist" element={<Addtherapy />} />
             <Route path="login" element={<Admlogin />} />
           </Route>
 
