@@ -12,6 +12,7 @@ import {
   Stack,
   Center,
   Heading,
+  Progress,
 } from '@chakra-ui/react';
 
 import CustomModal from '../../components/customModal';
@@ -27,7 +28,8 @@ export default function Referral() {
   const [relation, setRelation] = useState([]);
   const [issue, setIssue] = useState([]);
   const [response, setResponse] = useState({});
-  const [success, setSuccess] = useState(true);
+  const [submit, setSubmit] = useState(false);
+  const [isError, setIsError] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleNameChange = event => {
@@ -61,6 +63,7 @@ export default function Referral() {
   const handleSubmit = async event => {
     event.preventDefault();
     console.log('abc');
+    setSubmit(true);
     try {
       const tempResponse = await axios.post(
         'http://127.0.0.1:8000/api/booking/',
@@ -76,17 +79,23 @@ export default function Referral() {
           relation,
         })
       );
-      console.log(response);
-      setResponse(tempResponse);
+      console.log(tempResponse?.data);
+      if (tempResponse?.data?.status === "ERROR")
+        setIsError(true);
+      else
+        setResponse(tempResponse?.data);
+      setTimeout(() => {
+        window.location.reload("/")
+      }, 10000)
     } catch (error) {
       //show error page
-      setSuccess(false);
+      setIsError(true)
     }
   };
 
-  useEffect(() => {}, [response]);
+  useEffect(() => { console.log(response); }, [response]);
 
-  return (
+  return (<>
     <Flex
       flexDirection="column"
       width="100wh"
@@ -96,14 +105,26 @@ export default function Referral() {
       backgroundRepeat="no-repeat"
       justifyContent="center"
       alignItems="center"
+      border="1px solid red"
     >
+      {
+        submit && Object.keys(response).length === 0 && <Progress size='lg' width="100%"
+          isIndeterminate
+          position={"absolute"}
+          top="0%"
+          left="0%"
+          height="10px" />
+      }
+
+
       <Box
         display={'flex'}
         alignItems={'center'}
         justifyContent={'center'}
         padding="2em"
       >
-        {success && Object.keys(response).length > 0 && (
+
+        {submit && response?.status === "OKAY" && (
           <CustomModal
             type="success"
             message="Your referral has been submitted with reference ID: 123"
@@ -111,7 +132,7 @@ export default function Referral() {
             onClose={onClose}
           />
         )}
-        {!success && (
+        {submit && isError && (
           <CustomModal
             type="error"
             message="There was some error submitting your form"
@@ -128,6 +149,7 @@ export default function Referral() {
             boxShadow="md"
             rounded={'md'}
           >
+
             <Center>
               <Heading size={'xl'} color="blue.400">
                 Give a Referral
@@ -261,5 +283,6 @@ export default function Referral() {
         </form>
       </Box>
     </Flex>
+  </>
   );
 }

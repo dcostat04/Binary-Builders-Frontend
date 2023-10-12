@@ -23,7 +23,7 @@ const CFaLock = chakra(FaLock);
 
 export default function Login({ setUser }) {
   const [showPassword, setShowPassword] = useState(false);
-  const [response] = useState({ user: false });
+  const [response, setResponse] = useState({ user: false });
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -45,7 +45,7 @@ export default function Login({ setUser }) {
         'http://127.0.0.1:8000/api/login/',
         JSON.stringify(formData)
       );
-      console.log('Login successful!', response);
+      console.log('Login successful!', response.data);
       setUser(true);
       // window.location.replace('/');
     } catch (error) {
