@@ -52,9 +52,6 @@ export default function Login({ setUser }) {
       console.error('Error logging in:', error);
     }
   };
-  useEffect(() => {
-    console.log(response.user);
-  }, [response]);
 
   return (
     <Flex
