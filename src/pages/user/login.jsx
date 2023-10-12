@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Flex,
   Heading,
@@ -22,8 +22,10 @@ import axios from 'axios';
 const CFaMailBulk = chakra(FaMailBulk);
 const CFaLock = chakra(FaLock);
 
-export default function Admlogin() {
+export default function Login({ setUser }) {
   const [showPassword, setShowPassword] = useState(false);
+  const [response, setResponse] = useState({ user: false });
+
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const [formData, setFormData] = useState({
@@ -39,17 +41,22 @@ export default function Admlogin() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await axios.get(
+      console.log(formData);
+      const response = await axios.post(
         'http://127.0.0.1:8000/api/login/',
-        formData
+        JSON.stringify(formData)
       );
-
-      console.log('Login successful!', response.data);
-      window.location.replace('/');
+      console.log('Login successful!', response);
+      setUser(true);
+      // window.location.replace('/');
     } catch (error) {
       console.error('Error logging in:', error);
     }
   };
+  useEffect(() => {
+    console.log(response.user);
+  }, [response]);
+
   return (
     <Flex
       flexDirection="column"
