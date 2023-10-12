@@ -23,7 +23,6 @@ import {
   FaLocationArrow,
 } from 'react-icons/fa';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);

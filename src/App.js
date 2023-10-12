@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { UserContext } from './context';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import Login from './pages/user/login';
 import Signup from './pages/user/signup';
@@ -11,14 +10,13 @@ import Referral from './pages/user/referral'
 import Confirmation from './pages/user/confirmation'
 
 function App() {
-  const context = useContext(UserContext);
 
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={
-            context.active === true ? <Home /> : <Login />
+            <Home />
           } />
 
           <Route path="/user/signup" element={<Signup />} />

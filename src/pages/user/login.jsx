@@ -24,8 +24,6 @@ const CFaLock = chakra(FaLock);
 
 export default function Admlogin() {
   const [showPassword, setShowPassword] = useState(false);
-  const [response, setResponse] = useState({})
-
   const handleShowClick = () => setShowPassword(!showPassword);
 
   const [formData, setFormData] = useState({

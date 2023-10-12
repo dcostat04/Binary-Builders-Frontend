@@ -1,3 +1,13 @@
+import CaptionCarousel from "../../components/carousel";
+import Footer from "../../components/footer";
+import Header from "../../components/header";
+
 export default function Home() {
-  return <h1>hi</h1>;
+  return (
+
+    <><Header />
+      <CaptionCarousel />
+      <Footer />
+    </>
+  );
 }

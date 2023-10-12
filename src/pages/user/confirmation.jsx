@@ -10,7 +10,6 @@ import {
   useDisclosure,
   Stack,
   Center,
-  Header,
 } from '@chakra-ui/react';
 import { SingleDatepicker } from 'chakra-dayzed-datepicker';
 import TimePicker from '../../components/timePicker';
@@ -28,8 +27,6 @@ export default function Confirmation() {
   const [response, setResponse] = useState({});
   const [success, setSuccess] = useState(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const format = val => `$` + val;
   const parse = val => val.replace(/^\$/, '');
 
   const handleDateChange = event => {
@@ -72,7 +69,7 @@ export default function Confirmation() {
       );
       console.log(response);
       setResponse(tempResponse);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
